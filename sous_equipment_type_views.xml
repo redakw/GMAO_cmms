@@ -22,7 +22,7 @@
             <field name="model">cmms.sous.equipment.type</field>
 			
             <field name="arch" type="xml">
-                <form string="sous equipment type">
+                <form string="sous equipment type.">
                     <sheet>
  
                         <div class="oe_right oe_button_box" invisible="0">
