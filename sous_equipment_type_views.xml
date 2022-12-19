@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+     <data>
+
+    <record model="ir.ui.view" id="search_sous_equip">
+            <field name="model">cmms.sous.equipment.type</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="sous equipement">
+ 
+                    <field name="line_production" string="line de production"/> 
+                    <field name="equipment_id" string="Equipement"/>
+                    <field name="designation" string="Sous Equipement"/>
+
+                </search>
+            </field>
+    </record>
+
+	
+         <record id="view_cmms_sous_equipment_type_form" model="ir.ui.view">
+            <field name="name">cmms.sous.equipment.type.form</field>
+            <field name="model">cmms.sous.equipment.type</field>
+			
+            <field name="arch" type="xml">
+                <form string="sous equipment type">
+                    <sheet>
+ 
+                        <div class="oe_right oe_button_box" invisible="0">
+						
+                             <button name="open_ot"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-building-o"
+                                context="{'xml_id':'open_view_incident_new'}"
+                                help="show the Preventive maintenance for this Equipement">
+                               <field name="ot_count" widget="statinfo" string="Work Order"/>
+                            </button>
+ 
+						</div>
+						
+                        <group>
+							<field name="Ref"/>
+                            <!-- <field name="type"/> -->
+							<field name="nbr_ligne_prod" invisible="1"/> 
+                            <field name="nbr_equipment_s" invisible="1"/> 
+                            <field name="nbr_sous_equipment" invisible="1"/> 
+                            <field name="line_production"/>
+                            <field name="equipment_id" string="Equipement" domain="[('line_id' ,'=', line_production)]" />
+                            <field name="designation"/>
+                            <field name="product_ids" readonly="1" invisible="1"/>
+							<!-- attrs="{'invisible': [('equipment_id', '=',False)]}" domain="[('equipment_id','=',equipment_id)]"-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		 <record id="view_cmms_sous_equipment_type_tree" model="ir.ui.view">
+            <field name="name">cmms.sous.equipment.type.tree</field>
+            <field name="model">cmms.sous.equipment.type</field>
+			
+            <field name="arch" type="xml">
+                <tree>
+					<field name="nbr_ligne_prod" invisible="1"/>
+					<field name="nbr_equipment_s" invisible="1"/>
+					<field name="nbr_sous_equipment" invisible="1"/>
+					
+					<field name="Ref"/>
+					<!-- <field name="type"/> -->
+					<field name="line_production"  />
+
+                    <field name="equipment_id" string="Equipement" />
+					<field name="designation"/>
+					<field name="product_ids" widget="many2many_tags" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+		
+		
+		<!-- debut  sous equipement dans menu configuration -->
+		
+				 <!-- <record id="cmms_sous_equipment_config" model="ir.actions.act_window"> -->
+					<!-- <field name="name">cmms.sous.equipment.type</field> -->
+					<!-- <field name="res_model">cmms.sous.equipment.type</field> -->
+					<!-- <field name="view_mode">tree,form</field> -->
+				<!-- </record> -->
+				
+				 <!-- <menuitem id="cmms_sous_equipment_configuration" -->
+						   <!-- name="Sous Equipement" -->
+						   <!-- parent="menu_cmms_configuration" -->
+						   <!-- action="cmms_sous_equipment_config" -->
+						   <!-- sequence="5" -->
+						   <!-- /> -->
+						   
+		<!--  fin -->		   
+		
+		<!-- debut  sous equipement dans menu Fiche de vie -->	
+		
+			 <record id="cmms_sous_equipment_type_action" model="ir.actions.act_window">
+				<field name="name">cmms.sous.equipment.type</field>
+				<field name="res_model">cmms.sous.equipment.type</field>
+				<field name="view_mode">tree,form</field>
+				<!-- <field name="context">{"search_default_line_production":1,"search_default_equipment_id":2}</field> -->
+				<!-- <field name="context">{"search_default_equipment_id":1}</field> -->
+			</record>
+			
+			 <menuitem id="cmms_sous_equipment_type_menu"
+					   name="Sous Equipement"
+					   parent="menu_open_view_machine"
+					   action="cmms_sous_equipment_type_action"
+					   />
+					   
+		<!--  fin -->
+		
+		<!--  menu des organes -->
+		<!-- <menuitem id="cmms_product_product_menu" -->
+				   <!-- name="Organe" -->
+				   <!-- parent="menu_cmms_configuration" -->
+				   <!-- action="product.product_template_action" -->
+				   <!-- sequence="20"/> -->
+				   
+ 
+				   
+		<record id="product_normal_form_view_inherit_alpha" model="ir.ui.view">
+             <field name="name">product.template.inherit.alpha.form</field>
+             <field name="model">product.template</field>
+             <field name="inherit_id" ref="product.product_template_only_form_view"/>
+             <field name="arch" type="xml">
+				 
+				 <field name="sale_ok" position="before">
+				 <group colspan="1" col="2">
+					 <field name="Ref_Organe" string="Reference Organe"/>
+					 <field name="categorie"/>
+                     <field name="equipment_id" invisible="1"/>
+					 <field name="designation"  string="Designation " invisible="1"/>
+					 <field name="famille"  string="Famille"/>
+					 <field name="affectation"  string="Affectation"/>
+					 <field name="emplacement"  string="Emplacement"/>
+					 <field name="unit"  string="Unit"/>
+					 <field name="magasin"  string="Magasin"/>
+					 <field name="fabriquant"  string="fabriquant"/>
+					 <field name="interchabilite"  string="Interchabilite"/>
+					 <field name="ou"  string="ou" attrs="{'invisible': [('interchabilite', '!=','oui')]}" />
+					 <field name="stock_securite"/>
+					 <field name="stock_min"/>
+					 <field name="stock_max"/>
+					 <field name="consommation_moyenne"/>
+					 <field name="a_gerer"/>
+					 
+					 
+				</group> 
+					 <field colspan="4"  name="sous_equipment_ids" nolabel="1">
+						 <tree editable="bottom" >
+							 <field name="Ref"/>
+							 <field name="designation"/>
+						 </tree>
+					 </field>
+					 
+                 </field>
+             </field>
+         </record>
+ 
+		 
+ 
+    </data>
+</openerp>
+ 

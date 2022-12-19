@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+     <data>
+	 
+	 
+	 
+		    <!--equipement Kanban view -->
+		<record model="ir.ui.view" id="cmms_kanban_view_fv">
+			<field name="name">fv KANBAN</field>
+			<field name="model">cmms.fiche_vie</field>
+			<field name="arch" type="xml">
+
+
+		    <kanban>
+                <field name = "date"/>
+           
+            <templates>
+                <t t-name="kanban-box">
+                    <div>
+					                         
+                        	
+						<table border="1">
+						
+							<tr>
+								<td> <ul>  <li>Date: <field name="date"/></li><br/></ul></td> 
+							</tr> 
+					 
+						</table>
+				 
+				 
+                    </div>
+                </t>
+            </templates>
+            </kanban>
+				
+				
+				
+				
+			</field>
+		</record>
+		
+		
+		
+		
+		
+ 
+        	
+
+         <record id="view_cmms_fiche_vie_form" model="ir.ui.view">
+            <field name="name">cmms.fiche_vie.form</field>
+            <field name="model">cmms.fiche_vie</field>
+            <field name="arch" type="xml">
+                <form string="FV">
+                    <sheet>
+                        <group>
+							<field name="date"/>
+							
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		 <record id="view_cmms_fiche_vie_tree" model="ir.ui.view">
+            <field name="name">cmms.fiche_vie.tree</field>
+            <field name="model">cmms.fiche_vie</field>
+            <field name="arch" type="xml">
+									
+                <tree>
+					<field name="date"/>
+					
+                </tree>
+				
+            </field>
+        </record>
+
+		 <record id="cmms_fiche_vie_action" model="ir.actions.act_window">
+            <field name="name">cmms.fiche_vie</field>
+            <field name="res_model">cmms.fiche_vie</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+		
+		 <menuitem id="cmms_fiche_vie_menu"
+				   name="Fiche de Vie"
+				   parent="menu_open_view_incident_list"
+				   action="cmms_fiche_vie_action"  
+				   sequence="10"/>
+    </data>
+</openerp>

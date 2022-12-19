@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+ 
+	        <record id="view_organe_form" model="ir.ui.view">
+            <field name="name">cmms.organe.form</field>
+            <field name="model">cmms.organe</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Organe" version="7.0">
+                    <sheet>
+						<group>
+							<field name="item_no_" string="reference"/>
+							<field name="description"/>
+							<field name="quantite"/>
+						</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+		
+        <record id="view_organe_tree" model="ir.ui.view">
+            <field name="name">cmms.organe.tree</field>
+            <field name="model">cmms.organe</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Organe">
+					<field name="item_no_" string="reference" />
+					<field name="description" />
+					<field name="quantite"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="open_view_organe_new" model="ir.actions.act_window">
+            <field name="name">Organe</field>
+            <field name="res_model">cmms.organe</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		<menuitem id="cmms_organe_menu"
+				   name="Organes"
+				   parent="menu_cmms_configuration"
+				   action="open_view_organe_new"
+				   sequence= "30"
+				   />
+	</data>
+</openerp>
